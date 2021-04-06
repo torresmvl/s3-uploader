@@ -3,8 +3,9 @@ FROM alpine:3.13 as base
 RUN apk --update add \
     --no-cache \
     tini \
+    curl \
     nodejs \
-    yarn
+    yarn 
 
 RUN yarn global add pm2
 

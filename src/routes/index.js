@@ -10,6 +10,7 @@ const router = express.Router()
 const upload = multer({
   storage: multers3({
     s3: s3,
+    acl: 'public-read',
     bucket: process.env.S3_BUCKET,
     contentType: multers3.AUTO_CONTENT_TYPE,
     metadata: function (req, file, cb) {
@@ -23,7 +24,9 @@ const upload = multer({
 
 router.post('/upload', upload.single('file'), (req, res) => {
   if (req.file) {
-        res.send({url: req.file.location, key: req.file.key, metadata: req.file.metadata})
+        let url = s3.getSignedUrl('getObject', {Bucket: process.env.S3_BUCKET, Key: req.file.key, Expires: 4*60*60})
+        res.send({url: url})
+        console.log({path: req.file.location, key: req.file.key, metadata: req.file.metadata})
       } else {
         res.send("Missing image file/s");
       }
