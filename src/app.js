@@ -10,14 +10,14 @@ const app = express()
 app.use(logger('dev'))
 
 app.use(express.json())
-// app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }))
 app.use(rotas)
 
 // s3.bucketExists(process.env.S3_BUCKET, (err) => {
 //   if (err) {
 //     return console.log(err)
 //   }
-  app.listen(process.env.PORT || 3000, process.env.HOST, () => {
+  app.listen(PORT, HOST, () => {
     console.log(`api rodando em: http://${HOST}:${PORT}`)
   })
 // })

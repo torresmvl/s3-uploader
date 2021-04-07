@@ -31,37 +31,6 @@ router.post('/upload', upload.single('file'), (req, res) => {
         res.send("Missing image file/s");
       }
     })
-    
-    
-    // let storage = multer.memoryStorage()
-    // const upload = multer({ storage: storage }).single('file')
-
-    
-    // router.post('/upload', upload, (req, res) => {
-  //   s3.putObject(
-    //     process.env.S3_BUCKET,
-    //     req.file.originalname,
-//     req.file.buffer,
-//     (err, etag) => {
-//       if (err) {
-  //         return console.log(err)
-  //       }
-//       s3.presignedUrl(
-  //         'GET',
-  //         process.env.S3_BUCKET,
-//         req.file.originalname,
-//         4 * 60 * 60,
-//         (err, presignedUrl) => {
-  //           if (err) {
-//             return console.log(err)
-//           }
-//           res.status(200).json({ fileUrl: presignedUrl })
-//           console.log(req.file.buffer)
-//         }
-//       )
-//     }
-//   )
-// })
 
 router.get('/status', (req, res) => {
   res.status(200).json('OK')
